@@ -2,31 +2,49 @@
 <div [@routerTransition]> 
     <div class="container-fluid">
        
-        
         <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
             <div class="card-header">
                 Categories
             </div>
+            
             <div>
+                <button type="button" class="btn btn-light" (click)="createNew()">Add</button>
+            </div>
 
+            <nav>
+                <a *ngFor="let category of categories" (click)="select(category)">{{category.name}}</a>
+            </nav>
+
+            <div>  
                 <ul>
                     <li *ngFor="let category of categories" (click)="select(category)">{{category.name}}</li>
                 </ul>
-
-
             </div>
-           
-        </div>
-
-            <div *ngIf="selectedCategory">
-                <h1>Reactive Forms</h1>
+            
+            <div *ngIf="selectedCategory || newCateogry" >
+                <hr>
+                <h3>Reactive Forms</h3>
+                <h3>Editing: {{selectedCategory.name}}</h3>
                 <ca-detail [category]="selectedCategory"></ca-detail>
             </div>
-
-
         </div>
+    </div>
 </div> 
+
 -->
-<div [@routerTransition]> 
-<h1>test</h1>
+<button (click)="onRefresh()">refresh</button>
+<nav>
+    <a *ngFor="let category of categories" (click)="select(category)">{{category.name}}</a>
+</nav>
+ 
+
+<div *ngIf="selectedCategory || newCateogry" >
+    <hr>
+    <h3>Reactive Forms</h3>
+    <h3>Editing: {{selectedCategory.name}}</h3>
+    <ca-detail [category]="selectedCategory" (onUpdate)="onRefresh($event)"></ca-detail>
+
+
+    <p>heroForm value: {{ selectedCategory | json}} + {{now}}</p>
 </div>
+

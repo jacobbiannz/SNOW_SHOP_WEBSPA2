@@ -23,7 +23,7 @@ export class ConfigurationService {
     constructor(private http: Http) {}
 
     load() {
-        console.log("----------------------------configurateionserviceload----------------------------");
+        //console.log("----------------------------configurateionserviceload----------------------------");
         //const baseURI = document.baseURI!.endsWith('/') ? document.baseURI : `${document.baseURI}/`;
 
         this.isReady = true;

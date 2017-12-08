@@ -3,7 +3,8 @@
         <button type="submit"
                 [disabled]="categoryForm.pristine" class="btn btn-success">
             Save
-        </button> &nbsp;
+        </button>
+         &nbsp;
         <button type="reset" (click)="revert()"
                 [disabled]="categoryForm.pristine" class="btn btn-danger">
             Revert
@@ -16,13 +17,11 @@
             Name:
             <input class="form-control" formControlName="name">
         </label>
-    </div>
-
-    
-    
+    </div> 
 </form>
 
 <p>categoryForm value: {{ categoryForm.value | json}}</p>
+
 <!--
 <h4>Name change log</h4>
 <div *ngFor="let name of nameChangeLog">{{name}}</div>

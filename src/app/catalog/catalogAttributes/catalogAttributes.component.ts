@@ -8,6 +8,7 @@ import { ICatalogCategory } from '../../shared/models/catalogCategory.model';
 //import { SecurityService } from '../shared/services/security.service';
 import { Observable } from 'rxjs/Observable';
 import { routerTransition } from '../../router.animations';
+import { Time } from '@angular/common/src/i18n/locale_data_api';
 
 @Component({
     selector: 'catalogAttributes',
@@ -19,11 +20,12 @@ import { routerTransition } from '../../router.animations';
 export class CatalogAttributesComponent implements OnInit {
     categories: ICatalogCategory[];
     selectedCategory: ICatalogCategory;
-   
+    newCateogry : boolean = false;
     //authenticated: boolean = false;
     //authSubscription: Subscription;
     errorReceived: boolean;
-
+    public now: Date;
+    
     /*
     constructor(private service: CatalogCategoryService, private basketService: BasketWrapperService, private configurationService: ConfigurationService, private securityService: SecurityService) {
         this.authenticated = securityService.IsAuthorized;
@@ -36,14 +38,15 @@ export class CatalogAttributesComponent implements OnInit {
         ) {
         //this.authenticated = securityService.IsAuthorized;
         }
-   
+    
+
+
     ngOnInit() {
         
         // Configuration Settings:
         if (this.configurationService.isReady)
             {
-                this.loadData();
-              
+                this.loadData() 
             }   
         //else
             //this.configurationService.settingsLoaded$.subscribe(x => {
@@ -60,6 +63,11 @@ export class CatalogAttributesComponent implements OnInit {
         
     }
 
+    onRefresh(){
+        this.loadData();
+        
+    }
+
     loadData() {
         this.getCategories();
     }
@@ -67,12 +75,20 @@ export class CatalogAttributesComponent implements OnInit {
     getCategories() {
         this.service.getCategories().subscribe(categories => {
             this.categories = categories;
-            let allCategories = { id: 0, name: 'All', company: '', allProducts :'' };
-            this.categories.unshift(allCategories);
+            //let allCategories = { id: 0, name: 'All', company: '', allProducts :'' };
+            //this.categories.unshift(allCategories);
         });
+        //this.selectedCategory = undefined;
     }
 
-    select(category: ICatalogCategory) { this.selectedCategory = category; }
+    select(category: ICatalogCategory) { 
+        this.selectedCategory = category; 
+        this.now = new Date();
+    }
+
+    createNew(){
+        this.newCateogry = true;
+    }
 
     private handleError(error: any) {
         this.errorReceived = true;

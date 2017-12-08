@@ -28,10 +28,10 @@ export class DataService {
             options.headers.append('Authorization', 'Bearer ' + this.securityService.GetToken());
         }
         */
-        console.log("----------------------------dataservice--" + url + "--dataservice------------------------");
+        //console.log("----------------------------dataservice--" + url + "--dataservice------------------------");
         return this.http.get(url, options).map(
             (res: Response) => {
-                console.log("----------------------------dataservicereturn--" + res + "--dataservice------------------------");
+                //console.log("----------------------------dataservicereturn--" + res + "--dataservice------------------------");
                 return res;
             }).catch(this.handleError);
     }
@@ -89,7 +89,7 @@ export class DataService {
         }
         */
 
-        console.log(options);
+        //console.log(options);
         return this.http.put(url, data, options).map(
             (res: Response) => {
                 return res;

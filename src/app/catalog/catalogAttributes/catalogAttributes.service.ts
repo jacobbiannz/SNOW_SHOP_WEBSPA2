@@ -19,6 +19,8 @@ export class CatalogAttributesService {
     
     private categoryUrl: string = '';
     category: ICatalogCategory;
+    delayMs = 500;
+
 
     constructor(private service: DataService, private configurationService: ConfigurationService) {
         //this.configurationService.settingsLoaded$.subscribe(x => {
@@ -31,49 +33,32 @@ export class CatalogAttributesService {
         
     }
    
-    /*
-    getBrands(): Observable<ICatalogBrand[]> {
-        return this.service.get(this.brandUrl).map((response: Response) => {
-            return response.json();
-        });
-    }
-    */
-
     getCategories(): Observable<ICatalogCategory[]> {
         //console.log("----------------------------categoryUrl" + this.categoryUrl + "//////--------------------");
 
-        return this.service.get(this.categoryUrl)
+        return this.service.get('http://localhost:53423/api/category/categories')
             .map((response: Response) => {
                 //console.log("----------------------------categoryjson---" + response.json()['model'] + "//////--------------------");
                 //return response.json()['model'];
                 return response.json();
-            })
-            .catch(this.handleError);
-            
-    };
-
-    updateCategory(category: any): Observable<boolean> {
-        let url = "http://localhost:53423/api/category/updatecategory";
-        this.category = category;
-        
-        //console.log(this.category);
-        //console.log(JSON.stringify(category));
-        return this.service.putWithId(url, category).map((response: Response) => {
-            return true;
-        });
+            })        
     }
 
-    private handleError(error: Response | any) {
-        // In a real world app, you might use a remote logging infrastructure
-        let errMsg: string;
-        if (error instanceof Response) {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-        } else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return Observable.throw(errMsg);
+    updateCategory(category: ICatalogCategory): Observable<ICatalogCategory> {
+        let url = "http://localhost:53423/api/category/updatecategory";
+        //this.category = category;
+        return this.service.putWithId(url, category).map((response: Response) => {
+            return response.json();
+        });
+       
+    }
+
+    createCategory(category: any): Observable<boolean> {
+        let url = "http://localhost:53423/api/Category/CreateCategory";
+        this.category = category;
+        
+        return this.service.post(url, category).map((response: Response) => {
+            return true;
+        });
     }
 }
