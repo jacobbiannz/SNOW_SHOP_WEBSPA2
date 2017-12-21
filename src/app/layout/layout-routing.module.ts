@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
-
+import { AuthService } from '../shared/services/auth.service';
+import { AuthGuard } from '../shared';
 const routes: Routes = [
     {
         path: '',
@@ -24,7 +25,10 @@ const routes: Routes = [
         ]
     },
 ];
-
+export const authProviders = [
+    AuthGuard,
+    AuthService
+];
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]

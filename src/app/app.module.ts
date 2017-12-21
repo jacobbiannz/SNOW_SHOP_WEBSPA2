@@ -13,6 +13,11 @@ import { AuthGuard } from './shared';
 import { Router } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 
+import { AuthService } from './shared/services/auth.service';
+import { SecuredComponent } from './secured/secured.component';
+import { UnsecuredComponent } from './unsecured/unsecured.component';
+import { HttpModule } from "@angular/http";
+
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
     // for development
@@ -36,8 +41,8 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         AppRoutingModule
     ],
-    declarations: [AppComponent],
-    providers: [AuthGuard],  
+    declarations: [AppComponent,SecuredComponent, UnsecuredComponent],
+    providers: [AuthGuard,AuthService],  
     bootstrap: [AppComponent]
 })
 export class AppModule {
