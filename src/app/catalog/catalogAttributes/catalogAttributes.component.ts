@@ -88,6 +88,7 @@ export class CatalogAttributesComponent implements OnInit {
 
     createNew(){
         this.newCateogry = true;
+        this.selectedCategory = null;
     }
 
     private handleError(error: any) {

@@ -53,12 +53,21 @@ export class CatalogAttributesService {
        
     }
 
-    createCategory(category: any): Observable<boolean> {
+    createCategory(category: any): Observable<ICatalogCategory> {
         let url = "http://localhost:53423/api/Category/CreateCategory";
         this.category = category;
         
         return this.service.post(url, category).map((response: Response) => {
-            return true;
+            return response.json();
+        });
+    }
+
+    deleteCategory(category: any): Observable<ICatalogCategory> {
+        let url = "http://localhost:53423/api/Category/CreateCategory";
+        this.category = category;
+        
+        return this.service.post(url, category).map((response: Response) => {
+            return response.json();
         });
     }
 }

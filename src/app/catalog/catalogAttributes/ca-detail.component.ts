@@ -20,12 +20,15 @@ export class CADetailComponent implements OnChanges {
 
     load(){
         if(this.category != null){
+            console.log("------------------------------here 1------------------------");
             this.name = this.category.name;
             this.id = this.category.id;
         }
         else
         {
-           
+            this.name = "";
+            this.id = 0;
+            console.log("------------------------------here 2------------------------" + this.name );
         }
     }
     categoryForm: FormGroup; // <--- heroForm is of type FormGroup
@@ -49,9 +52,10 @@ export class CADetailComponent implements OnChanges {
     }
 
     onSubmit() {
-        this.category = this.prepareSaveCategory();
-        //this.service.updateCategory(this.category).subscribe(/* error handling */);
+        //this.category = this.prepareSaveCategory();
+        
         if(this.category != null){
+            console.log("---------------------here here1 09/12----------------------");
             this.service.updateCategory(this.prepareSaveCategory()).subscribe(
                 category => {
                     this.onUpdate.emit(); 
@@ -60,12 +64,16 @@ export class CADetailComponent implements OnChanges {
         }        
 
         else{
-            this.service.createCategory(this.prepareSaveCategory()).subscribe();
+            console.log("---------------------here here 09/12----------------------");
+            this.service.createCategory(this.prepareSaveCategory()).subscribe(
+                category => {
+                    this.onUpdate.emit(); 
+                }
+            );
         }
         
-        this.ngOnChanges();
-        
-       
+        this.category = this.prepareSaveCategory();
+        this.ngOnChanges(); 
     }
 
     prepareSaveCategory(): ICatalogCategory {

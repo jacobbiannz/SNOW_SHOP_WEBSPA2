@@ -1,38 +1,56 @@
-﻿<!--
-<div [@routerTransition]> 
-    <div class="container-fluid">
-       
-        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-            <div class="card-header">
-                Categories
+﻿<div [@routerTransition]> 
+    <div class="row">
+        <div class="col-sm-4">
+            <!--
+            <div class="container-fluid">
+            -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="pull-left">Categories</h5>
+                        <a class="btn pull-right" (click)="createNew()"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    </div>
+                
+                    <div>  
+                        <ul class="nav navbar-nav">
+                            <li *ngFor="let category of categories" (click)="select(category)">{{category.name}}</li>
+                        </ul>
+                    </div>
+                    
+                    <div *ngIf="selectedCategory || newCateogry" >
+                        <hr>
+                        <h3>Edit Category</h3>
+                        <ca-detail [category]="selectedCategory" (onUpdate)="onRefresh($event)"></ca-detail>
+                    </div>
+                </div>
+            <!--
             </div>
-            
-            <div>
-                <button type="button" class="btn btn-light" (click)="createNew()">Add</button>
-            </div>
+            -->
+        </div>
 
-            <nav>
-                <a *ngFor="let category of categories" (click)="select(category)">{{category.name}}</a>
-            </nav>
-
-            <div>  
-                <ul>
-                    <li *ngFor="let category of categories" (click)="select(category)">{{category.name}}</li>
-                </ul>
-            </div>
+        <div class="col-sm-4">
             
-            <div *ngIf="selectedCategory || newCateogry" >
-                <hr>
-                <h3>Reactive Forms</h3>
-                <h3>Editing: {{selectedCategory.name}}</h3>
-                <ca-detail [category]="selectedCategory"></ca-detail>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="pull-left">Brands</h5>
+                    <a class="btn pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="pull-left">Sizes</h5>
+                    <a class="btn pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </div>
             </div>
         </div>
     </div>
 </div> 
 
--->
-<button (click)="onRefresh()">refresh</button>
+<!--
+
 <nav>
     <a *ngFor="let category of categories" (click)="select(category)">{{category.name}}</a>
 </nav>
@@ -48,3 +66,4 @@
     <p>heroForm value: {{ selectedCategory | json}} + {{now}}</p>
 </div>
 
+-->
